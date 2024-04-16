@@ -1,3 +1,6 @@
 *.vs/
 *.filters
 *.user
+
+/bin/
+/bin-int/
