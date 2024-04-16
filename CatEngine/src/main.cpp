@@ -26,7 +26,7 @@ int main(void)
     glfwSwapInterval(1);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(960, 720, "Pig!", NULL, NULL);
+    window = glfwCreateWindow(500, 500, "Pig!", NULL, NULL);
     if (!window)
     {
         glfwTerminate();

@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;core;vendors</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;src\core;vendors</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;core;vendors</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;src\core;vendors</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;core;vendors</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;src\core;vendors</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;core;vendors</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendors\include;src\core;vendors</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,27 +155,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\Shader\Shader.cpp" />
-    <ClCompile Include="core\Utils\Log.cpp" />
-    <ClCompile Include="core\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\core\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\core\Buffers\VertexArray.cpp" />
+    <ClCompile Include="src\core\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\core\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\core\Shader\Shader.cpp" />
+    <ClCompile Include="src\core\Textures\Texture.cpp" />
+    <ClCompile Include="src\core\Utils\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="core\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="core\Textures\Texture.cpp" />
     <ClCompile Include="vendors\glad.c" />
-    <ClCompile Include="core\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="core\Buffers\VertexArray.cpp" />
     <ClCompile Include="vendors\glm\detail\glm.cpp" />
     <ClCompile Include="vendors\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\Buffers\VertexBuffer.h" />
-    <ClInclude Include="core\Buffers\VertexBufferLayout.h" />
-    <ClInclude Include="core\Shader\Shader.h" />
-    <ClInclude Include="core\Buffers\IndexBuffer.h" />
-    <ClInclude Include="core\Utils\Log.h" />
-    <ClInclude Include="core\Renderer\Renderer.h" />
-    <ClInclude Include="core\Buffers\VertexArray.h" />
-    <ClInclude Include="core\Textures\Texture.h" />
+    <ClInclude Include="src\core\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\core\Buffers\VertexArray.h" />
+    <ClInclude Include="src\core\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\core\Buffers\VertexBufferLayout.h" />
+    <ClInclude Include="src\core\Renderer\Renderer.h" />
+    <ClInclude Include="src\core\Shader\Shader.h" />
+    <ClInclude Include="src\core\Textures\Texture.h" />
+    <ClInclude Include="src\core\Utils\Log.h" />
     <ClInclude Include="vendors\glm\common.hpp" />
     <ClInclude Include="vendors\glm\detail\compute_common.hpp" />
     <ClInclude Include="vendors\glm\detail\compute_vector_relational.hpp" />
