@@ -1,5 +1,6 @@
 #include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_glfw_gl3.h"
+#include "ImGui/imgui_impl_glfw.h"
+#include "ImGui/imgui_impl_opengl3.h"
 #include<glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -27,7 +28,9 @@ int main(void)
     if (!glfwInit())
         return -1;
 
-    
+    const char* glsl_version = "#version 130";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(1920, 1080, "Pig!", NULL, NULL);
@@ -47,7 +50,8 @@ int main(void)
 
     ImGui::StyleColorsDark();
     
-    ImGui_ImplGlfwGL3_Init(window, true);
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
@@ -103,7 +107,9 @@ int main(void)
 
         renderer.Draw(va, ib, shader);
 
-        ImGui_ImplGlfwGL3_NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -150,7 +156,9 @@ int main(void)
         glViewport(0, 0, display_w, display_h);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+
         glfwSwapBuffers(window);
 
     }

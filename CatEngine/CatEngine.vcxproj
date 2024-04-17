@@ -168,7 +168,10 @@
     <ClCompile Include="vendors\ImGui\imgui.cpp" />
     <ClCompile Include="vendors\ImGui\imgui_demo.cpp" />
     <ClCompile Include="vendors\ImGui\imgui_draw.cpp" />
-    <ClCompile Include="vendors\ImGui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="vendors\ImGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="vendors\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="vendors\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="vendors\ImGui\main.cpp" />
     <ClCompile Include="vendors\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -464,11 +467,12 @@
     <ClInclude Include="vendors\glm\vector_relational.hpp" />
     <ClInclude Include="vendors\ImGui\imconfig.h" />
     <ClInclude Include="vendors\ImGui\imgui.h" />
-    <ClInclude Include="vendors\ImGui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="vendors\ImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="vendors\ImGui\imgui_impl_opengl3.h" />
     <ClInclude Include="vendors\ImGui\imgui_internal.h" />
-    <ClInclude Include="vendors\ImGui\stb_rect_pack.h" />
-    <ClInclude Include="vendors\ImGui\stb_textedit.h" />
-    <ClInclude Include="vendors\ImGui\stb_truetype.h" />
+    <ClInclude Include="vendors\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="vendors\ImGui\imstb_textedit.h" />
+    <ClInclude Include="vendors\ImGui\imstb_truetype.h" />
     <ClInclude Include="vendors\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
