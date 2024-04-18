@@ -3,10 +3,6 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-#include <string>
-
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_glfw.h"
