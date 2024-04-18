@@ -1,7 +1,8 @@
 *.vs/
 *.filters
 *.user
-*.ini/
+
 
 /bin/
 /bin-int/
+/CatEngine/imgui.ini
