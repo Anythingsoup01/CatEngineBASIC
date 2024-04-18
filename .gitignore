@@ -1,7 +1,7 @@
 *.vs/
 *.filters
 *.user
-imgui.ini
+*.ini
 
 /bin/
 /bin-int/
