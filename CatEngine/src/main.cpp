@@ -33,7 +33,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1080, "Pig!", NULL, NULL);
+    window = glfwCreateWindow(960, 540, "Pig!", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -45,24 +45,14 @@ int main(void)
 
     gladLoadGL();
 
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io; 
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-
-    ImGui::StyleColorsDark();
-    
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
-
     std::cout << glGetString(GL_VERSION) << std::endl;
 
 
     float positions[]{
-        -0.5f, -0.5f, 0.0f, 0.0f, // 0
-         0.5f, -0.5f, 1.0f, 0.0f, // 1
-        -0.5f,  0.5f, 0.0f, 1.0f, // 2
-         0.5f,  0.5f, 1.0f, 1.0f  // 3
+        0.0f, 0.0f, 0.0f, 0.0f, // 0
+        250.f, 0.0f, 1.0f, 0.0f, // 1
+        0.0, 250.0f, 0.0f, 1.0f, // 2
+        250.0, 250.0f, 1.0f, 1.0f  // 3
     };
 
     unsigned int indices[]{
@@ -81,43 +71,66 @@ int main(void)
     IndexBuffer ib(indices, sizeof(unsigned int) * 6);
     ib.Bind();
 
-    glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, 1.0f, - 1.0f);
+    glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 0.0f, 0.0f));
+    glm::vec3 translation = glm::vec3(10);
+    glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
+
+    glm::mat4 mvp = proj * view * model;
+
+    
+
 
     Shader shader("res/shaders/None.catshader");
     shader.Bind();
     shader.SetUniform4f("u_Color", 1.0, 1.0, 1.0, 1.0);
-    shader.SetUniformMat4f("u_MVP", proj);
+    shader.SetUniformMat4f("u_MVP", mvp);
 
     Texture texture("res/textures/Pig.png");
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
-
-    bool show_demo_window = true;
-    bool show_another_window = true;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     shader.Unbind();
     vb.Unbind();
     ib.Unbind();
     /* Loop until the user closes the window */
     Renderer renderer;
+
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    
+    
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init();
+
+
+    //ImGui variables: 
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     while (!glfwWindowShouldClose(window))
     {
+        /* Poll for and process events */
         glfwPollEvents();
-        /* Render here */
-        renderer.Clear();
 
+
+        /* Render here */
+        
+        renderer.Clear();
         renderer.Draw(va, ib, shader);
 
+        
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        
+        
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
 
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
         {
             static float f = 0.0f;
             static int counter = 0;
@@ -136,7 +149,7 @@ int main(void)
             ImGui::SameLine();
             ImGui::Text("counter = %d", counter);
 
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
             ImGui::End();
         }
 
@@ -150,20 +163,20 @@ int main(void)
             ImGui::End();
         }
 
-        /* Poll for and process events */
-        
-
+        // Rendering
         ImGui::Render();
         int display_w, display_h;
+        glfwMakeContextCurrent(window);
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui::EndFrame();
 
+        Log::LogFloat2("x: ", io.DisplaySize.x, "y: ", io.DisplaySize.y);
 
+        glfwMakeContextCurrent(window);
         glfwSwapBuffers(window);
-
     }
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
