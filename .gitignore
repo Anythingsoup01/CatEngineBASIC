@@ -1,7 +1,7 @@
 *.vs/
 *.filters
 *.user
-*.ini
+*.ini/
 
 /bin/
 /bin-int/
