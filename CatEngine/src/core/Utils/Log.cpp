@@ -38,3 +38,19 @@ bool GLLog(const char* function, const char* file, int line)
     }
     return true;
 }
+
+
+void Log::LogString(const char* str0)
+{    
+        std::cout << str0 << std::endl;
+}
+
+void Log::LogFloat1(const char* des0, const float v0)
+{
+    std::cout << des0 << v0 << std::endl;
+}
+
+void Log::LogFloat2(const char* des0, const float v0, const char* des1, const float v1)
+{
+    std::cout << des0 << v0 << ", " << des1 << v1 << std::endl;
+}
